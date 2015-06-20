@@ -1,0 +1,25 @@
+Dexterity/Web/.idea/workspace.xml
+Dexterity/Web/*.war
+
+#Maven ignore files
+target
+
+#Eclispe ignore files
+*.project
+*.classpath
+.settings
+
+#Idea
+*.ipr
+*.iml
+*.iws
+*.ids
+
+#OS X
+.DS_Store
+
+#STS
+*.springBeans
+Dexterity/Web-built
+Dexterity/Debug
+Dexterity/Release

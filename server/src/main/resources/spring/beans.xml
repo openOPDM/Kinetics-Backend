@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="org.kinetics" />
+
+	<!-- CORE beans -->
+	<bean class="com.lohika.server.core.strategy.RequestStrategyLocator" />
+	<bean class="com.lohika.server.core.RequestExecutor" />
+
+	<bean class="com.lohika.server.core.validator.SimpleValidatorController">
+		<constructor-arg>
+			<list>
+				<ref bean="RequestArgumentsValidator" />
+				<ref bean="AuthenticationValidator" />
+				<ref bean="AuthorizationValidator" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean name="RequestArgumentsValidator"
+		class="com.lohika.server.core.validator.RequestArgumentsValidator" />
+	<bean name="AuthenticationValidator"
+		class="com.lohika.server.core.validator.AuthenticationValidator">
+		<constructor-arg index="0" value="8" />
+		<constructor-arg index="1" value="HOURS" />
+	</bean>
+	<bean name="AuthorizationValidator"
+		class="com.lohika.server.core.validator.AuthorizationValidator" />
+
+</beans>

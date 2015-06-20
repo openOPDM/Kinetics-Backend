@@ -1,0 +1,5 @@
+<html><body>
+Greetings!
+${user.firstName} ${user.secondName} shared Test with you in the Kinetics POC project!<br/>
+To see shared Test just complete account registration by <a href="${scheme}://${domain}${port}/kineticsweb/#register-shared/${emailB64}/${userB64}/${projectB64}">visiting this link</a>
+</body></html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<!-- DROP REFERENCES TO CUSTOMER TABLE -->
+	<changeSet id="1" author="akaverin">
+		<dropForeignKeyConstraint baseTableName="USER"
+			constraintName="FK_USER_CUSTOMER_ID" />
+		<dropForeignKeyConstraint baseTableName="EXTENSIONMETADATA"
+			constraintName="FK_EXTENSIONMETADATA_CUSTOMER_ID" />
+	</changeSet>
+	<changeSet id="2" author="akaverin">
+		<dropColumn tableName="USER" columnName="CUSTOMER_ID" />
+	</changeSet>
+	<!-- EXTENSIONS moved to SiteAdmin level -->
+	<changeSet id="3" author="akaverin">
+		<dropColumn tableName="EXTENSIONMETADATA" columnName="CUSTOMER_ID" />
+	</changeSet>
+	<!-- RENAME CUSTOMER -> PROJECT -->
+	<changeSet author="akaverin" id="4">
+		<renameTable newTableName="PROJECT" oldTableName="CUSTOMER" />
+	</changeSet>
+	<!-- ADD REFERENCES TO PROJECT -->
+	<changeSet id="5" author="akaverin">
+		<!-- clean up old data -->
+		<delete tableName="SESSION" />
+		<addColumn tableName="SESSION">
+			<column name="PROJECT_ID" type="INT">
+				<constraints foreignKeyName="FK_SESSION_PROJECT_ID"
+					deleteCascade="true" references="PROJECT(ID)" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet id="6" author="akaverin">
+		<createTable tableName="USER_PROJECT">
+			<column name="users_ID" type="INT">
+				<constraints nullable="false" foreignKeyName="FK_USER_PROJECT_users_ID"
+					deleteCascade="true" references="USER(ID)" />
+			</column>
+			<column name="projects_ID" type="INT">
+				<constraints nullable="false" foreignKeyName="FK_USER_PROJECT_projects_ID"
+					deleteCascade="true" references="PROJECT(ID)" />
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="users_ID, projects_ID"
+			tableName="USER_PROJECT" />
+	</changeSet>
+	<changeSet id="7" author="akaverin">
+		<addColumn tableName="TESTSESSION">
+			<column name="PROJECT_ID" type="INT">
+				<constraints foreignKeyName="FK_TESTSESSION_PROJECT_ID"
+					deleteCascade="true" references="PROJECT(ID)" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet id="8" author="akaverin">
+		<addColumn tableName="ANALYSTPATIENT">
+			<column name="PROJECT_ID" type="INT">
+				<constraints foreignKeyName="FK_ANALYSTPATIENT_PROJECT_ID"
+					deleteCascade="true" references="PROJECT(ID)" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet id="9" author="akaverin">
+		<createIndex tableName="USER" indexName="EMAIL">
+			<column name="EMAIL">
+				<constraints unique="true" />
+			</column>
+		</createIndex>
+	</changeSet>
+	<changeSet id="10" author="akaverin">
+		<addColumn tableName="CONFIRMATION">
+			<column name="TIMESTAMP" type="DATETIME" />
+		</addColumn>
+	</changeSet>
+
+	<!-- migrate data for OPDM -->
+	<changeSet id="11" author="akaverin">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="1">select count(*) from PROJECT
+			</sqlCheck>
+		</preConditions>
+		<sqlFile path="classpath:db/sql/opdm_1_1.sql" />
+	</changeSet>
+
+
+</databaseChangeLog>

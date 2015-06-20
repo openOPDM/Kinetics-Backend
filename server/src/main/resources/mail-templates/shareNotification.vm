@@ -1,0 +1,4 @@
+<html><body>
+Dear ${receiver.firstName}, some Test was shared with you by ${sender.firstName} ${sender.secondName}<br/>
+To see shared Test please <a href="${scheme}://${domain}${port}/kineticsweb/#shared/${userB64}/${projectB64}">visit this link</a>
+</body></html>

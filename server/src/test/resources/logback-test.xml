@@ -1,0 +1,24 @@
+<configuration scan="true" debug="true">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{HH:mm:ss.SSS} %-1level [%thread] %logger{20} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- Default log level -->
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<!-- Kinetics log level -->
+	<logger name="org.kinetics" level="debug" />
+	<!-- Lower priority in production -->
+	<logger name="org.kinetics.dao.util.EclipseLinkLogAdapter"
+		level="info" />
+
+	<!-- sends logs to logback-beagle -->
+	<!-- <consolePlugin /> -->
+
+</configuration>

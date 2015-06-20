@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="dkrishu" id="1370436891528-1">
+        <createTable tableName="ANALYSTPATIENT">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ANALYST_ID" type="INT"/>
+            <column name="PATIENT_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-2">
+        <createTable tableName="CONFIRMATION">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CODE" type="VARCHAR(255)"/>
+            <column name="USER_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-3">
+        <createTable tableName="CUSTOMER">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-4">
+        <createTable tableName="EXTENSIONDATA">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ENTITYID" type="INT"/>
+            <column name="VALUE" type="VARCHAR(255)"/>
+            <column name="METADATA_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-5">
+        <createTable tableName="EXTENSIONLISTNODE">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LABEL" type="VARCHAR(255)"/>
+            <column name="METADATA_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-6">
+        <createTable tableName="EXTENSIONMETADATA">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ENTITY" type="INT"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="TYPE" type="INT"/>
+            <column name="CUSTOMER_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-7">
+        <createTable tableName="ExtensionMetaData_FILTERS">
+            <column name="FILTERDATA" type="VARCHAR(255)"/>
+            <column name="FILTERNAME" type="VARCHAR(255)"/>
+            <column name="ExtensionMetaData_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-8">
+        <createTable tableName="ExtensionMetaData_PROPERTIES">
+            <column name="ExtensionMetaData_ID" type="INT"/>
+            <column name="PROPERTIES" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-9">
+        <createTable tableName="ROLE">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-10">
+        <createTable tableName="SEQUENCE">
+            <column name="SEQ_NAME" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SEQ_COUNT" type="DECIMAL(38,0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-10.1">
+        <insert tableName="SEQUENCE">
+            <column name="SEQ_COUNT" valueNumeric="0"/>
+            <column name="SEQ_NAME" value="SEQ_GEN"/>
+        </insert>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-11">
+        <createTable tableName="SESSION">
+            <column name="SESSIONTOKEN" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="TIMESTAMP" type="DATETIME"/>
+            <column name="USER_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-12">
+        <createTable tableName="SETTING">
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="VALUE" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-13">
+        <createTable tableName="TESTSESSION">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATIONDATE" type="DATETIME"/>
+            <column defaultValueBoolean="false" name="ISVALID" type="BIT"/>
+            <column name="NOTES" type="LONGTEXT"/>
+            <column name="RAWDATA" type="LONGTEXT"/>
+            <column name="SCORE" type="DOUBLE"/>
+            <column name="TYPE" type="VARCHAR(50)"/>
+            <column name="USER_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-14">
+        <createTable tableName="USER">
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="UID" type="VARCHAR(50)"/>
+            <column name="BIRTHDAY" type="DATE"/>
+            <column name="CREATIONDATE" type="DATE"/>
+            <column name="EMAIL" type="VARCHAR(50)"/>
+            <column name="FIRSTNAME" type="VARCHAR(50)"/>
+            <column name="GENDER" type="INT"/>
+            <column name="SECONDNAME" type="VARCHAR(50)"/>
+            <column name="STATUS" type="INT"/>
+            <column name="TIMESTAMP" type="DATETIME"/>
+            <column name="HASH" type="LONGBLOB"/>
+            <column name="SALT" type="LONGBLOB"/>
+            <column name="CUSTOMER_ID" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-15">
+        <createTable tableName="USER_ROLE">
+            <column name="users_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roles_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-16">
+        <addPrimaryKey columnNames="users_ID, roles_ID" tableName="USER_ROLE"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-17">
+        <createIndex indexName="CODE" tableName="CONFIRMATION" unique="true">
+            <column name="CODE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-18">
+        <createIndex indexName="UNQ_CONFIRMATION_0" tableName="CONFIRMATION" unique="true">
+            <column name="CODE"/>
+            <column name="USER_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-19">
+        <createIndex indexName="NAME" tableName="CUSTOMER" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-20">
+        <createIndex indexName="INDEX_EXTENSIONMETADATA_NAME" tableName="EXTENSIONMETADATA" unique="false">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-21">
+        <createIndex indexName="NAME" tableName="ROLE" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-22">
+        <createIndex indexName="UID" tableName="USER" unique="true">
+            <column name="UID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-23">
+        <addForeignKeyConstraint baseColumnNames="ANALYST_ID" baseTableName="ANALYSTPATIENT" constraintName="FK_ANALYSTPATIENT_ANALYST_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="USER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-24">
+        <addForeignKeyConstraint baseColumnNames="PATIENT_ID" baseTableName="ANALYSTPATIENT" constraintName="FK_ANALYSTPATIENT_PATIENT_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="USER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-25">
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="CONFIRMATION" constraintName="FK_CONFIRMATION_USER_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="USER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-26">
+        <addForeignKeyConstraint baseColumnNames="METADATA_ID" baseTableName="EXTENSIONDATA" constraintName="FK_EXTENSIONDATA_METADATA_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="EXTENSIONMETADATA" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-27">
+        <addForeignKeyConstraint baseColumnNames="METADATA_ID" baseTableName="EXTENSIONLISTNODE" constraintName="FK_EXTENSIONLISTNODE_METADATA_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="EXTENSIONMETADATA" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-28">
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_ID" baseTableName="EXTENSIONMETADATA" constraintName="FK_EXTENSIONMETADATA_CUSTOMER_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="CUSTOMER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-29">
+        <addForeignKeyConstraint baseColumnNames="ExtensionMetaData_ID" baseTableName="ExtensionMetaData_FILTERS" constraintName="FK_ExtensionMetaData_FILTERS_ExtensionMetaData_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="EXTENSIONMETADATA" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-30">
+        <addForeignKeyConstraint baseColumnNames="ExtensionMetaData_ID" baseTableName="ExtensionMetaData_PROPERTIES" constraintName="ExtensionMetaData_PROPERTIES_ExtensionMetaData_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="EXTENSIONMETADATA" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-31">
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="SESSION" constraintName="FK_SESSION_USER_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="USER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-32">
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="TESTSESSION" constraintName="FK_TESTSESSION_USER_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="USER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-33">
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_ID" baseTableName="USER" constraintName="FK_USER_CUSTOMER_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="CUSTOMER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-34">
+        <addForeignKeyConstraint baseColumnNames="roles_ID" baseTableName="USER_ROLE" constraintName="FK_USER_ROLE_roles_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="ROLE" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-35">
+        <addForeignKeyConstraint baseColumnNames="users_ID" baseTableName="USER_ROLE" constraintName="FK_USER_ROLE_users_ID" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="ID" referencedTableName="USER" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="dkrishu" id="1370436891528-36">
+        <addColumn tableName="CUSTOMER">
+            <column name="STATUS" type="INT" value="0"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

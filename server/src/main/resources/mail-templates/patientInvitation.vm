@@ -1,0 +1,4 @@
+<html><body>
+Dear ${user.firstName}, you are invited to the Kinetics POC project!<br/>
+To complete account registration please <a href="${scheme}://${domain}${port}/kineticsweb/#confirmPatientProfile/${emailB64}/${codeB64}">visit this link</a>
+</body></html>

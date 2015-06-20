@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<!-- SHARE feature -->
+	<changeSet id="1" author="akaverin">
+		<createTable tableName="SHAREDTEST">
+			<column name="ID" type="INT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="USER_ID" type="INT">
+				<constraints nullable="false" foreignKeyName="FK_SHAREDTEST_USER_ID"
+					deleteCascade="true" references="USER(ID)" />
+			</column>
+			<column name="PROJECT_ID" type="INT">
+				<constraints nullable="false" foreignKeyName="FK_SHAREDTEST_PROJECT_ID"
+					deleteCascade="true" references="PROJECT(ID)" />
+			</column>
+			<column name="EMAIL" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="2" author="akaverin">
+		<createIndex tableName="SHAREDTEST" indexName="INDEX_SHAREDTEST_EMAIL">
+			<column name="EMAIL" />
+		</createIndex>
+	</changeSet>
+
+	<!-- Audit & Reporting feature -->
+	<changeSet id="3" author="akaverin">
+		<createTable tableName="EVENT">
+			<column name="ID" type="INT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="TYPE" type="INT">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIMESTAMP" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="EXTRA" type="VARCHAR(100)" />
+		</createTable>
+	</changeSet>
+	<changeSet id="4" author="akaverin">
+		<createIndex tableName="EVENT" indexName="INDEX_EVENT_TYPE">
+			<column name="TYPE" />
+		</createIndex>
+	</changeSet>
+
+	<!-- Social feature -->
+	<changeSet id="5" author="akaverin">
+		<createTable tableName="SOCIALTEST">
+			<column name="ID" type="INT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="TESTSESSION_ID" type="INT">
+				<constraints nullable="false" foreignKeyName="FK_SOCIALTEST_TESTSESSION_ID"
+					deleteCascade="true" references="TESTSESSION(ID)" unique="true" />
+			</column>
+			<column name="TOKEN" type="VARCHAR(40)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="6" author="akaverin">
+		<createIndex tableName="SOCIALTEST" indexName="INDEX_SOCIALTEST_TOKEN">
+			<column name="TOKEN" />
+		</createIndex>
+	</changeSet>
+
+</databaseChangeLog>

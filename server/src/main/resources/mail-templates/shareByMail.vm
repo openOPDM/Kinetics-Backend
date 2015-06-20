@@ -1,0 +1,4 @@
+<html><body>
+${message}<br/>
+To see shared Test please <a href="${urlPath}">visit this link</a>
+</body></html>
