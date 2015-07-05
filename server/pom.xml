@@ -345,6 +345,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -352,6 +353,25 @@
 			</resource>
 		</resources>
 	</build>
+	
+	<profiles>
+			<profile>
+				<id>env</id>
+					<properties>
+						<db.driverClassName>com.mysql.jdbc.Driver</db.driverClassName>
+						<db.url>%db_url%</db.url>
+						<db.name>%db_name%</db.name>
+						<db.username>%db_username%</db.username>
+						<db.password>%db_password%</db.password>
+						<web.scheme>https</web.scheme>
+						<web.domain>%domain_name%</web.domain>
+						<web.port>%http_or_https%</web.port>
+						<web.email>%no-reply_email%</web.email>
+						<web.defaultData>true</web.defaultData>
+				</properties>
+			</profile>
+		</profiles>
+	
 	<repositories>
 		<repository>
 			<id>EclipseLink</id>
